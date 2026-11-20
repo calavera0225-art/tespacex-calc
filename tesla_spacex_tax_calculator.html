@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="테슬라 주식 보유자의 가상 합병·주식교환 시나리오별 해외주식 양도소득세 및 별도 현금 필요액 계산기">
+<title>테슬라 × 스페이스X 합병 세금 시나리오 계산기</title>
+<style>
+:root{color-scheme:light;--bg:#f4f6fa;--card:#fff;--ink:#142033;--muted:#637083;--line:#dfe5ec;--primary:#175cd3;--primarydark:#1048a9;--good:#067647;--bad:#c43232;--soft:#ecf3ff;--radius:18px}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR","Malgun Gothic",sans-serif;line-height:1.55}main{max-width:1060px;margin:0 auto;padding:28px 16px 70px}h1{font-size:clamp(25px,4vw,36px);line-height:1.25;margin:8px 0 12px;letter-spacing:-.7px}h2{font-size:20px;letter-spacing:-.35px;margin:0 0 18px}.lead{color:var(--muted);margin:0 0 23px}.eyebrow{color:var(--primary);font-weight:800;font-size:13px;letter-spacing:.06em}.notice{background:#fff6e7;border:1px solid #f0d9a8;border-radius:14px;padding:14px 17px;font-size:14px;margin:20px 0}.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:25px;margin:19px 0;box-shadow:0 3px 10px rgba(23,38,61,.025)}.sectionhead{display:flex;justify-content:space-between;align-items:center;gap:10px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.field label{display:block;font-size:14px;font-weight:650;margin-bottom:7px}.field input{display:block;width:100%;padding:12px 13px;border:1px solid #b9c5d5;border-radius:10px;background:#fff;color:var(--ink);font-size:17px;min-height:46px;font-variant-numeric:tabular-nums}.field input:focus{outline:3px solid #b7d0ff;border-color:var(--primary)}.sub{font-size:12px;color:var(--muted);margin:6px 0 0}.rangeLine{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:14px;font-weight:700}.rangeLine output{color:var(--primary);font-size:19px}.range{width:100%;accent-color:var(--primary);margin:9px 0 2px}.rangeEnds{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}.split{border-top:1px solid var(--line);margin-top:22px;padding-top:20px}.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.metric{background:#f6f8fc;border-radius:13px;padding:15px;min-width:0}.metric .small{font-size:12px;color:var(--muted);margin-bottom:6px}.metric .large{font-size:clamp(18px,2.5vw,26px);font-weight:800;letter-spacing:-.5px;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}.good{color:var(--good)}.bad{color:var(--bad)}.tablewrap{overflow-x:auto}.tablewrap table{width:100%;border-collapse:collapse;font-size:14px;min-width:640px}th{text-align:left;color:#4b586c;background:#f2f5f9;font-weight:750;padding:12px}td{padding:14px 12px;border-bottom:1px solid var(--line);vertical-align:top}th.num,td.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}.scenarioName{font-weight:750}.scenarioDesc{color:var(--muted);font-size:12px;margin-top:3px}.tablewrap tbody tr:last-child td{border-bottom:0}.selected{background:#f1f6ff}.columns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.mini{border:1px solid var(--line);border-radius:14px;padding:17px;min-width:0}.mini h3{font-size:16px;line-height:1.35;margin:0 0 15px}.kv{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid #edf0f4;padding:8px 0;font-size:13px}.kv span{color:var(--muted)}.kv strong{text-align:right;font-variant-numeric:tabular-nums}.emphasis{font-weight:800;font-size:19px;color:var(--primary);margin:11px 0 0;overflow-wrap:anywhere}.actions{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 0}button{background:var(--primary);border:1px solid var(--primary);border-radius:10px;color:#fff;padding:11px 18px;font:inherit;font-weight:700;cursor:pointer}button:hover{background:var(--primarydark)}button.secondary{background:#fff;color:var(--primary)}button.secondary:hover{background:#eaf2ff}.notes{font-size:13px;color:#526071}.notes p{margin:8px 0}.notes ul{padding-left:21px}.notes li{margin:6px 0}footer{color:var(--muted);font-size:12px;margin-top:18px}a{color:var(--primary)}.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:760px){main{padding:20px 12px 55px}.card{padding:18px;margin:14px 0}.columns{grid-template-columns:1fr}.metrics{grid-template-columns:1fr}.mini{padding:15px}.tablewrap{margin:0 -4px}.lead{font-size:14px}}
+@media(max-width:420px){.grid{grid-template-columns:1fr;gap:12px}h2{font-size:18px}.sectionhead{align-items:flex-start}}
+@media print{body{background:#fff}main{padding:0}.card{break-inside:avoid;box-shadow:none}button{display:none}.tablewrap{overflow:visible}.tablewrap table{min-width:0;font-size:11px}th,td{padding:8px}.columns{grid-template-columns:repeat(3,1fr)}.notice{break-inside:avoid}}
+</style>
+</head>
+<body>
+<main>
+<header>
+<div class="eyebrow">해외주식 세금 비교 도구 · 가상 시나리오</div>
+<h1>테슬라 × 스페이스X<br>합병 세금 계산기</h1>
+<p class="lead">합병 전 매도 · 전액 주식 교환 · 현금+주식 교환 · 과세이연 · 계속 보유를 비교합니다. 입력 내용을 바꾸면 즉시 다시 계산됩니다.</p>
+<div class="notice"><strong>중요:</strong> 테슬라·스페이스X 간 합병과 실제 주식 교환조건 또는 한국에서의 세무 처리는 이 계산기가 확정하거나 보증하지 않습니다. 아래는 <strong>사용자가 선택한 교환 평가액을 전액 양도소득세 과세 대상으로 보는 가정</strong> 등에 따른 비교입니다. 실제 합병 구조에 따라 의제배당, 현금 대가에 대한 별도 과세, 과세이연 가능 여부가 달라질 수 있습니다.</div>
+</header>
+<section class="card" aria-labelledby="holdTitle">
+<div class="sectionhead"><h2 id="holdTitle">1. 테슬라 보유 정보</h2><button type="button" class="secondary" id="resetBtn">초기화</button></div>
+<div class="grid">
+<div class="field"><label for="qty">보유 주식 수 (주)</label><input id="qty" type="number" inputmode="decimal" min="0" step="any" value="100"></div>
+<div class="field"><label for="purchase">평균 매입 단가 (USD)</label><input id="purchase" type="number" inputmode="decimal" min="0" step="any" value="200"></div>
+<div class="field"><label for="future">가정한 매도·교환 시 주가 (USD)</label><input id="future" type="number" inputmode="decimal" min="0" step="any" value="400"></div>
+<div class="field"><label for="buyFx">평균 취득 환율 (KRW/USD)</label><input id="buyFx" type="number" inputmode="decimal" min="0" step="any" value="1350"></div>
+<div class="field"><label for="sellFx">매도·교환 환율 (KRW/USD)</label><input id="sellFx" type="number" inputmode="decimal" min="0" step="any" value="1450"></div>
+<div class="field"><label for="fee">매도·교환 관련 비용 (KRW)</label><input id="fee" type="number" inputmode="decimal" min="0" step="any" value="0"><p class="sub">계산상 공제 가능한 비용이라고 가정</p></div>
+</div>
+<div class="split">
+<h2>2. 세금·교환 조건</h2>
+<div class="rangeLine"><label for="cashPct">현금+주식 교환 시 현금 비율</label><output id="cashPctLabel" for="cashPct">20%</output></div>
+<input class="range" id="cashPct" type="range" min="0" max="100" value="20" step="5"><div class="rangeEnds"><span>0% · 전액 주식</span><span>100% · 전액 현금</span></div>
+<div class="grid" style="margin-top:18px">
+<div class="field"><label for="other">같은 해 다른 해외주식 실현손익 (KRW)</label><input id="other" type="number" inputmode="decimal" step="any" value="0"><p class="sub">손실은 음수로 입력. 세액 감소 효과도 반영.</p></div>
+<div class="field"><label for="usedDeduction">기본공제 기사용액 (KRW)</label><input id="usedDeduction" type="number" inputmode="decimal" min="0" max="2500000" step="any" value="0"><p class="sub">0~2,500,000원 · 간이 가정용</p></div>
+</div>
+</div>
+</section>
+<section class="card" aria-labelledby="summaryTitle"><h2 id="summaryTitle">3. 보유 주식 평가</h2>
+<div class="metrics">
+<div class="metric"><div class="small">원화 기준 취득가액</div><div class="large" id="cost">-</div></div>
+<div class="metric"><div class="small">매도·교환 시 평가액</div><div class="large" id="proceeds">-</div></div>
+<div class="metric"><div class="small">비용 차감 후 예상 양도차익</div><div class="large" id="gain">-</div></div>
+</div>
+<div class="metric" style="background:var(--soft);margin-top:12px"><div class="small">전액 과세대상인 경우, 다른 주식 손익을 반영한 추가 예상 세금</div><div class="large" id="mainTax">-</div><div class="sub" id="taxExplanation"></div></div>
+</section>
+<section class="card" aria-labelledby="tableTitle"><h2 id="tableTitle">4. 시나리오별 세금·현금 비교</h2>
+<div class="tablewrap"><table><thead><tr><th>시나리오</th><th class="num">예상 추가 세액</th><th class="num">별도로 마련할 현금</th></tr></thead><tbody id="scenarioRows"></tbody></table></div>
+<p class="sub">합병 전 매도: 매도 대금으로 세금 납부 가능하다고 가정 / 전액 주식 교환: 세금 납부용 현금이 따로 필요 / 현금+주식 교환: 현금 수령분을 먼저 세금에 충당 / 과세이연: 교환 시점에 과세하지 않는다는 가상 가정 / 계속 보유: 양도·교환이 발생하지 않는 경우</p>
+</section>
+<section class="card" aria-labelledby="detailTitle"><h2 id="detailTitle">5. 시나리오 상세 결과</h2>
+<div class="columns">
+<article class="mini"><h3>① 합병 전 전량 매도</h3><div class="kv"><span>매도대금 (비용 차감)</span><strong id="saleCash">-</strong></div><div class="kv"><span>추가 예상세금</span><strong id="saleTax">-</strong></div><div class="sub">매도대금에서 추가 예상세금을 차감한 금액</div><div class="emphasis" id="saleAfter">-</div></article>
+<article class="mini"><h3>② 전액 주식 교환 · 즉시 과세</h3><div class="kv"><span>교환 주식 평가액</span><strong id="allStock">-</strong></div><div class="kv"><span>받는 현금</span><strong>0원</strong></div><div class="sub">세금 및 입력 비용을 감안해 별도로 필요한 현금</div><div class="emphasis" id="allNeed">-</div></article>
+<article class="mini"><h3>③ 현금+주식 교환 · 즉시 과세</h3><div class="kv"><span>교환 주식 평가액</span><strong id="mixedStock">-</strong></div><div class="kv"><span>현금 수령액 (비용 차감 전)</span><strong id="mixedCash">-</strong></div><div class="kv"><span>추가 예상세금</span><strong id="mixedTax">-</strong></div><div class="sub">현금 수령분을 세금과 비용에 충당한 뒤 부족액</div><div class="emphasis" id="mixedNeed">-</div></article>
+</div>
+<div class="actions"><button type="button" id="copyBtn">계산 결과 복사</button><button type="button" id="printBtn" class="secondary">인쇄 / PDF 저장</button></div><p class="sub" id="copyStatus" aria-live="polite"></p>
+</section>
+<section class="card notes" aria-labelledby="cautionTitle"><h2 id="cautionTitle">주의사항 및 계산 기준</h2>
+<ul>
+<li>한국 거주 개인의 일반적인 국외 상장주식 양도소득세를 가정하여 <strong>20% 소득세 + 2% 지방소득세 = 22%</strong>, 연간 양도소득 기본공제 <strong>250만원</strong>을 적용합니다.</li>
+<li>세금은 원화 기준으로 계산합니다. 여러 차례 매수했다면 실제로는 각 취득일의 취득가액·환율과 증권사 계산내역을 확인해야 합니다.</li>
+<li>‘추가 예상 세금’은 <strong>테슬라 처분을 포함했을 때의 계산세액 − 다른 주식 손익만 있을 때의 계산세액</strong>입니다. 손익 통산, 공제 사용 순서와 신고 세부 사항에 따라 실제 세액과 달라질 수 있습니다. 음수로 나오면 전체 세액이 감소하는 것으로 추정하는 것이지 별도 환급이 확정됐다는 의미는 아닙니다.</li>
+<li>현금 혼합교환은 <strong>전체 평가액을 과세대상으로 보는 가상 모델</strong>이며, 실제 합병 대가의 과세표준·시점·세목은 계약과 법규에 따라 다를 수 있습니다.</li>
+<li>과세이연 및 계속 보유 시 ‘0원’은 현재 시점의 <strong>추가 양도세</strong> 가정입니다. 이후 매도하거나 다른 과세사건이 발생하면 세금이 발생할 수 있습니다.</li>
+<li>수수료 입력값은 해당 거래의 현금 유출로 가정하고 양도차익에서도 공제했습니다. 실제 세법상 필요경비 해당 여부는 따로 확인해야 합니다.</li>
+<li>이 계산기는 교육용 추정 도구이며, 실제 신고·매도 결정을 위한 전문 세무의견이 아닙니다.</li>
+</ul>
+<p><strong>공식 확인처:</strong> <a href="https://www.nts.go.kr" target="_blank" rel="noopener noreferrer">국세청</a> · <a href="https://www.sec.gov/edgar/search/" target="_blank" rel="noopener noreferrer">미국 SEC 기업공시 검색</a></p>
+</section>
+<footer>입력 데이터는 브라우저 내부에서만 계산되며 서버로 전송하지 않습니다. 특정 주식 가격이나 환율의 실시간 시세를 가져오지 않습니다.</footer>
+</main>
+<script>
+(() => {
+'use strict';
+const defaults={qty:100,purchase:200,future:400,buyFx:1350,sellFx:1450,fee:0,other:0,usedDeduction:0,cashPct:20};
+const ids=Object.keys(defaults),el=id=>document.getElementById(id);
+const num=id=>Number(el(id).value)||0;
+const nonneg=id=>Math.max(0,num(id));
+const money=n=>`${Math.round(n).toLocaleString('ko-KR')}원`;
+const signed=n=>(n<0?'−':'')+money(Math.abs(n));
+const row=(name,detail,tax,need,style='')=>`<tr class="${style}"><td><div class="scenarioName">${name}</div><div class="scenarioDesc">${detail}</div></td><td class="num">${signed(tax)}</td><td class="num">${money(need)}</td></tr>`;
+let last={};
+function compute(){
+ const qty=nonneg('qty'),purchase=nonneg('purchase'),future=nonneg('future'),buyFx=nonneg('buyFx'),sellFx=nonneg('sellFx'),fee=nonneg('fee'),other=num('other'),cashPct=nonneg('cashPct');
+ const cost=qty*purchase*buyFx,proceeds=qty*future*sellFx,gain=proceeds-cost-fee;
+ const remainingDeduction=2500000-Math.min(2500000,nonneg('usedDeduction'));
+ const taxOn=g=>Math.max(0,g-remainingDeduction)*.22;
+ const baseline=taxOn(other),total=taxOn(other+gain),delta=total-baseline;
+ const pct=Math.min(100,cashPct)/100,receivedCash=proceeds*pct,receivedStock=proceeds*(1-pct);
+ const saleNet=proceeds-fee-delta,allNeed=Math.max(0,delta+fee),mixedNeed=Math.max(0,delta+fee-receivedCash),saleNeed=Math.max(0,delta+fee-proceeds);
+ const color=(id,v)=>{el(id).classList.toggle('bad',v<0);el(id).classList.toggle('good',v>=0)};
+ el('cashPctLabel').textContent=Math.round(cashPct)+'%';
+ el('cost').textContent=money(cost);el('proceeds').textContent=money(proceeds);el('gain').textContent=signed(gain);color('gain',gain);
+ el('mainTax').textContent=signed(delta);color('mainTax',-delta);
+ el('taxExplanation').textContent=`총 계산세액 ${money(total)} − 다른 해외주식 손익만 있을 때 ${money(baseline)} · 미사용 기본공제 가정 ${money(remainingDeduction)}`;
+ el('scenarioRows').innerHTML=[
+ row('① 합병 전 전량 매도','매도대금으로 세금·비용 충당',delta,saleNeed),
+ row('② 전액 주식 교환','교환 시 전액 즉시 양도세 과세 가정',delta,allNeed,'selected'),
+ row('③ 현금+주식 교환',`현금 ${Math.round(cashPct)}% 수령, 전액 즉시 과세 가정`,delta,mixedNeed),
+ row('④ 과세이연 주식 교환','교환 당시 추가 세금 0원 가정',0,Math.max(0,fee)),
+ row('⑤ 계속 보유','매도·교환 없음',0,0)
+ ].join('');
+ el('saleCash').textContent=money(proceeds-fee);el('saleTax').textContent=signed(delta);el('saleAfter').textContent=signed(saleNet);
+ el('allStock').textContent=money(proceeds);el('allNeed').textContent=money(allNeed);
+ el('mixedStock').textContent=money(receivedStock);el('mixedCash').textContent=money(receivedCash);el('mixedTax').textContent=signed(delta);el('mixedNeed').textContent=money(mixedNeed);
+ last={qty,purchase,future,buyFx,sellFx,cost,proceeds,gain,fee,other,cashPct,baseline,total,delta,allNeed,mixedNeed,saleNet,receivedCash,receivedStock};
+}
+ids.forEach(id=>el(id).addEventListener('input',compute));
+el('resetBtn').addEventListener('click',()=>{ids.forEach(id=>el(id).value=defaults[id]);compute();el('copyStatus').textContent='초기값으로 돌아갔습니다.'});
+el('printBtn').addEventListener('click',()=>window.print());
+el('copyBtn').addEventListener('click',async()=>{
+ const d=last;
+ const result=[`테슬라 × 스페이스X 가상 합병 세금 비교`,`보유 ${d.qty}주 / 평균 매입 $${d.purchase} / 평가 $${d.future}`,`취득환율 ${d.buyFx}원 / 평가환율 ${d.sellFx}원`,`원화 취득가액: ${money(d.cost)}`,`원화 평가액: ${money(d.proceeds)}`,`예상 양도차익: ${signed(d.gain)}`,`합병 전 매도 추가세금: ${signed(d.delta)}`,`합병 전 매도 시 예상 잔여현금: ${signed(d.saleNet)}`,`전액 주식 교환 시 별도 필요한 현금: ${money(d.allNeed)}`,`현금 ${d.cashPct}% 혼합교환 시 별도 필요한 현금: ${money(d.mixedNeed)}`,`과세이연 교환 시 당장 추가 양도세: 0원 (가정)`,`계속 보유 시 당장 추가 양도세: 0원 (양도·교환 없음)`,`※ 합병, 주식교환, 세법 처리 미확정. 교육용 가상 시뮬레이션.`].join('\n');
+ try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(result)}else{const t=document.createElement('textarea');t.value=result;t.style.position='fixed';t.style.opacity='0';document.body.append(t);t.select();if(!document.execCommand('copy'))throw Error('copy unsupported');t.remove()}el('copyStatus').textContent='계산 결과가 복사되었습니다.'}catch(_){el('copyStatus').textContent='브라우저에서 복사를 허용하지 않았습니다. 인쇄 / PDF 저장을 이용해 주세요.'}
+});
+compute();
+})();
+</script>
+</body>
+</html>
